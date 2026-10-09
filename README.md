@@ -1,31 +1,61 @@
-# typecho chat
+<h1 align="center">typecho chat</h1>
 
-一款适用于 Typecho 的轻量聊天室插件。访客可以查看消息，登录用户可以发送文字、表情、图片和录制语音。
+<p align="center">一款适用于 Typecho 的轻量聊天室插件。<br>文字与表情 · 图片与录音 · 深浅主题 · 离线 IP 地区</p>
 
-| 项目 | 信息 |
+<p align="center">
+  <img src="https://img.shields.io/badge/Typecho%201.3.0-E54B4B?style=flat-square" alt="Typecho 1.3.0">
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&amp;logo=php&amp;logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/JavaScript-B89A00?style=flat-square&amp;logo=javascript&amp;logoColor=white" alt="JavaScript">
+  <img src="https://img.shields.io/badge/CSS-663399?style=flat-square&amp;logo=css&amp;logoColor=white" alt="CSS">
+  <br>
+  <img src="https://img.shields.io/badge/MySQL%20%2F%20MariaDB-4479A1?style=flat-square&amp;logo=mysql&amp;logoColor=white" alt="MySQL / MariaDB">
+  <img src="https://img.shields.io/badge/SQLite%20%2F%20PostgreSQL-336791?style=flat-square&amp;logo=postgresql&amp;logoColor=white" alt="SQLite / PostgreSQL">
+  <img src="https://img.shields.io/badge/ip2region-24563D?style=flat-square" alt="ip2region">
+  <img src="https://img.shields.io/badge/License%20MIT-222222?style=flat-square" alt="License MIT">
+</p>
+
+<p align="center">
+  <a href="https://github.com/LLLimit/Typecho-chat/releases/latest">下载插件</a> ·
+  <a href="#快速开始">快速开始</a> ·
+  <a href="#使用说明">使用说明</a> ·
+  <a href="https://github.com/LLLimit/Typecho-chat/releases">版本记录</a> ·
+  <a href="https://github.com/LLLimit/Typecho-chat/issues">反馈问题</a>
+</p>
+
+---
+
+访客可以查看聊天内容，登录用户可以发送文字、表情、图片和录制语音。插件保留最近 30 天消息，支持未读提醒与管理员清屏。
+
+## 技术栈与兼容性
+
+| 项目 | 说明 |
 | --- | --- |
 | 当前版本 | 1.3.3 |
-| Typecho | 1.3.0 |
-| 数据库 | MySQL / MariaDB、SQLite、PostgreSQL |
-| 作者 | [LLLimit](https://github.com/LLLimit) |
+| 博客平台 | Typecho 1.3.0 |
+| 插件与前端 | PHP · JavaScript · CSS |
+| 数据库 | MySQL / MariaDB · SQLite · PostgreSQL |
+| 浏览器录音 | MediaRecorder · HTTPS · 麦克风权限 |
+| 地区查询 | ip2region 离线 IPv4 / IPv6 数据库 |
 
-## 功能
+## 功能亮点
 
-- 深色与浅色主题，可手动切换并跟随 Handsome 主题初始外观。
-- 登录用户发送文字、内置表情、图片和录音语音；访客可阅读聊天内容。
-- 录音可试听后发送，聊天消息提供语音播放条。
-- 兼容 AdminBeautifyAvatar 的用户头像设置，并回退到 Typecho Gravatar。
-- 使用随包提供的 ip2region 数据库解析 IP 粗略归属地。
-- 新消息未读计数和提示音。
-- 消息保留最近 30 天；后台可手动清空消息和附件。
+| 功能 | 说明 |
+| --- | --- |
+| 💬 多种消息 | 登录用户发送文字、表情、图片和录音，访客可阅读 |
+| 🌓 深浅主题 | 手动切换，支持跟随 Handsome 主题的初始外观 |
+| 🎙️ 录音语音 | 录音试听后发送，消息提供语音播放条 |
+| 🖼️ 用户头像 | 兼容 AdminBeautifyAvatar，回退到 Typecho Gravatar |
+| 🌍 IP 地区 | 本地 ip2region 查询粗略归属地 |
+| 🔔 消息提醒 | 新消息未读计数和提示音 |
+| 🧹 消息清理 | 滚动保留最近 30 天，后台可手动清空消息及附件 |
 
-## 安装
+## 快速开始
 
-1. 从 GitHub Releases 下载插件压缩包。
+1. 从 [GitHub Releases](https://github.com/LLLimit/Typecho-chat/releases/latest) 下载插件压缩包。
 2. 将压缩包里的 `TypechoChat` 文件夹放到 Typecho 的 `usr/plugins/` 下。
 3. 在 Typecho 后台的“插件”页面启用 **typecho chat**。
 
-如果从 GitHub 仓库下载源码 ZIP，请将解压出的目录重命名为 `TypechoChat` 后再放入 `usr/plugins/`。主题模板需要执行 `$this->footer()` 来加载聊天室；Handsome 主题已支持。
+当前仓库用于文档与版本发布，仓库自动生成的源码 ZIP 不包含插件程序。请使用 Release 附件中的插件包，并确认 `usr/plugins/TypechoChat/Plugin.php` 存在。主题模板需要执行 `$this->footer()` 来加载聊天室；Handsome 主题已支持。
 
 数据库账号需要有创建表的权限。首次启用或接口首次运行时，插件会按需创建地区、图片和语音元数据表。
 
@@ -47,7 +77,7 @@
 
 IP 地区由本地 ip2region 数据库查询。插件只保存地区文字，不保存原始 IP，也不会将 IP 发送到在线查询服务。插件优先读取 `CF-Connecting-IP`，否则使用 `REMOTE_ADDR`。若站点使用反向代理，应限制源站只接受可信代理转发的请求，避免客户端伪造代理请求头。地区数据可能过期或无法识别某些地址。
 
-## 开发与依赖
+## 插件结构与依赖
 
 插件入口为 `Plugin.php`，前端资源为 `chat.js` 和 `chat.css`。`vendor/ip2region/` 包含 ip2region 的 PHP 查询器和离线 IPv4/IPv6 数据库，其上游许可为 Apache-2.0 或 MIT，许可文本随文件提供。
 
@@ -55,6 +85,6 @@ IP 地区由本地 ip2region 数据库查询。插件只保存地区文字，不
 
 本项目主插件代码采用 [MIT License](LICENSE)。`vendor/ip2region/` 下的第三方文件不属于本项目许可证范围，请按该目录中附带的上游许可文件使用。
 
-## 作者
+## 反馈与作者
 
-[LLLimit](https://github.com/LLLimit)
+欢迎通过 [Issues](https://github.com/LLLimit/Typecho-chat/issues) 反馈问题。作者：[LLLimit](https://github.com/LLLimit)。
